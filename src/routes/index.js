@@ -516,10 +516,10 @@ export default function Router() {
         name="Kategori"
         component={Kategori}
         options={({ route, navigation }) => ({
-          title: 'Detail Pembantu',
-          headerTintColor: 'white',
+          title: 'Kategori',
+          headerTintColor: colors.black,
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.white,
             elevation: 0, // remove shadow on Android
           },
           cardStyleInterpolator: ({ current, layouts }) => {

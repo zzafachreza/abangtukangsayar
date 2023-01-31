@@ -95,7 +95,7 @@ export default function Checkout({ navigation, route }) {
       setLoading(true)
       console.error('kirim', kirim);
       axios.post(urlAPI + '/1add_transaksi.php', kirim).then(rr => {
-        // console.log('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data);
+        console.log('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data);
         setTimeout(() => {
           setLoading(false);
           showMessage({
@@ -103,7 +103,7 @@ export default function Checkout({ navigation, route }) {
             message: 'Transaksi kamu berhasil dikirim'
           });
 
-          // Linking.openURL('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data)
+          Linking.openURL('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data)
 
           navigation.replace('ListData');
         }, 1500)

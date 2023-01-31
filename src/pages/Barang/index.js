@@ -49,7 +49,7 @@ export default function ({ navigation, route }) {
 
 
     getDataBarang();
-    getDataKategori();
+    // getDataKategori();
   }, []);
 
   const addToCart = () => {
@@ -86,30 +86,21 @@ export default function ({ navigation, route }) {
 
 
 
-  const getDataKategori = () => {
-    axios.post(urlAPI + '/1data_kategori.php').then(res => {
 
-
-      setKategori(res.data);
-    })
-  }
-
-
-
-  const getDataBarang = (y, z = route.params.key == null ? '' : route.params.key) => {
+  const getDataBarang = () => {
     setLoading(true);
 
     getData('user').then(res => {
       setUser(res);
       axios.post(urlAPI + '/1data_barang.php', {
-        key: z,
-        key2: y,
-        fid_user: res.id,
-      }).then(res => {
-        setMykey('');
+        fid_subkategori: route.params.fid_subkategori,
+        fid_user: res.id
+      }).then(dt => {
 
+        setMykey('');
         setLoading(false);
-        setData(res.data);
+        setData(dt.data);
+        console.log(dt.data)
       });
     })
 
@@ -180,7 +171,7 @@ export default function ({ navigation, route }) {
             }).then(x => {
               console.warn('add wishlist', x.data);
 
-              getDataBarang('', route.params.key)
+              getDataBarang()
 
 
             })
@@ -334,7 +325,7 @@ export default function ({ navigation, route }) {
         flexDirection: 'row'
       }}>
 
-        <View style={{
+        {/* <View style={{
           flex: 0.3,
           marginBottom: 50,
 
@@ -345,7 +336,7 @@ export default function ({ navigation, route }) {
             renderItem={__renderItemKategori}
             keyExtractor={item => item.id}
           />
-        </View>
+        </View> */}
 
         <View style={{
           flex: 1,

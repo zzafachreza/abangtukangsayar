@@ -111,9 +111,9 @@ export default function Home({ navigation }) {
 
   const __renderItemKategori = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('Barang', {
-        key: item.id,
-        id_user: user.id
+      <TouchableOpacity onPress={() => navigation.navigate('Kategori', {
+        fid_kategori: item.id,
+        nama_kategori: item.nama_kategori
       })} style={{
         marginHorizontal: 5,
         borderRadius: 5,
@@ -166,8 +166,8 @@ export default function Home({ navigation }) {
         <View>
 
           <Image source={require('../../assets/logo.png')} style={{
-            width: '70%',
-            height: 30,
+            width: '80%',
+            height: 50,
             marginVertical: 10,
             resizeMode: 'contain',
             alignSelf: 'center'

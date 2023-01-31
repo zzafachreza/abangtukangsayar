@@ -22,7 +22,7 @@ import { getData, storeData, urlAPI } from '../../utils/localStorage';
 import axios from 'axios';
 import { useIsFocused } from '@react-navigation/native';
 import { Linking } from 'react-native';
-
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 export default function BarangDetail({ navigation, route }) {
     const item = route.params;
     navigation.setOptions({
@@ -37,12 +37,19 @@ export default function BarangDetail({ navigation, route }) {
     const [jumlah, setJumlah] = useState('1');
     const [user, setUser] = useState({});
     const [cart, setCart] = useState(0);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
 
         axios.post(urlAPI + '/company.php').then(c => {
             console.log(c.data);
             setComp(c.data);
+        })
+        axios.post(urlAPI + '/1data_foto.php', {
+            fid_barang: route.params.id
+        }).then(c => {
+            console.log('foto', c.data);
+            setData(c.data)
         })
 
 
@@ -73,6 +80,37 @@ export default function BarangDetail({ navigation, route }) {
         };
 
     }, [isFocused]);
+
+
+    const renderCarouselItem = ({ item }) => (
+        <View style={{
+            // backgroundColor: colors.primary,
+
+        }}>
+            <Image
+                source={{ uri: item.image }}
+                style={{
+                    resizeMode: 'contain',
+                    alignSelf: 'center',
+                    height: 200,
+                    width: 200,
+                    borderRadius: 10,
+                }}
+            />
+            <View style={{
+                backgroundColor: colors.border_list,
+                width: 50,
+                borderRadius: 5,
+                marginHorizontal: 10,
+            }}>
+                <Text style={{
+                    fontFamily: fonts.primary[400],
+                    textAlign: 'center'
+                }}>{item.no}/{item.jml}</Text>
+            </View>
+        </View>
+    );
+
 
     const modalizeRef = useRef();
 
@@ -199,16 +237,23 @@ export default function BarangDetail({ navigation, route }) {
                     flex: 1,
                     backgroundColor: colors.background1,
                 }}>
-                {!keyboardStatus && <Image
-                    style={{
-                        height: windowHeight / 3.5,
-                        width: windowWidth,
-                        resizeMode: 'contain'
-                    }}
-                    source={{
-                        uri: item.image,
-                    }}
-                />}
+                {!keyboardStatus &&
+
+                    <View>
+                        <Carousel
+                            loop={false}
+                            // layout="stack"
+                            layoutCardOffset={0}
+                            data={data}
+                            containerCustomStyle={styles.carousel}
+                            renderItem={renderCarouselItem}
+                            sliderWidth={windowWidth}
+                            itemWidth={windowWidth}
+                            removeClippedSubviews={false}
+                        />
+                    </View>
+
+                }
 
 
                 <View

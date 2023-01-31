@@ -18,7 +18,7 @@ import { fonts } from '../../utils/fonts';
 import { MyInput, MyGap, MyButton } from '../../components';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
-import { storeData, getData, urlAPI } from '../../utils/localStorage';
+import { storeData, getData, urlAPI, MYAPP } from '../../utils/localStorage';
 import { showMessage } from 'react-native-flash-message';
 import { Icon } from 'react-native-elements';
 
@@ -35,30 +35,32 @@ export default function Login({ navigation }) {
     password: '',
   });
 
+  const backAction = () => {
+    Alert.alert(MYAPP, "Apakah kamu yakin akan keluar aplikasi ?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "YES", onPress: () => BackHandler.exitApp() }
+    ]);
+    return true;
+  };
+
+
   useEffect(() => {
     getData('token').then(res => {
       console.log('data token,', res);
       setToken(res.token);
     });
 
-    // const backAction = () => {
-    //   Alert.alert("TMP Mart", "Apakah kamu yakin akan keluar aplikasi ?", [
-    //     {
-    //       text: "Cancel",
-    //       onPress: () => null,
-    //       style: "cancel"
-    //     },
-    //     { text: "YES", onPress: () => BackHandler.exitApp() }
-    //   ]);
-    //   return true;
-    // };
 
-    // const backHandler = BackHandler.addEventListener(
-    //   "hardwareBackPress",
-    //   backAction
-    // );
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
 
-    // return () => backHandler.remove();
+    return () => backHandler.remove();
 
 
   }, []);

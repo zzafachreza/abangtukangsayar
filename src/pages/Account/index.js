@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
-  Text,
+  Text, BackHandler,
   View,
   SafeAreaView,
   Image,
@@ -38,6 +38,7 @@ export default function Account({ navigation, route }) {
     storeData('user', null);
 
     navigation.replace('Login');
+
   };
 
   const kirimWa = x => {
