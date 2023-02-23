@@ -264,81 +264,7 @@ export default function BarangEdit({ navigation, route }) {
                         </Text>
                     </ScrollView>
                     {/* pilihan uom */}
-                    <View style={{ flexDirection: 'row' }}>
 
-                        <TouchableOpacity onPress={() => {
-                            setPilih({
-                                a: true,
-                                b: false,
-                                c: false,
-                                d: false,
-                                e: false
-                            });
-                            setUom(item.satuan)
-                        }} style={pilih.a ? styles.ok : styles.not}>
-                            <Text style={pilih.a ? styles.okText : styles.notText}>{item.satuan}</Text>
-                        </TouchableOpacity>
-
-                        {item.satuan2 !== "" &&
-                            <TouchableOpacity onPress={() => {
-                                setPilih({
-                                    a: false,
-                                    b: true,
-                                    c: false,
-                                    d: false,
-                                    e: false
-                                });
-                                setUom(item.satuan2)
-                            }} style={pilih.b ? styles.ok : styles.not}>
-                                <Text style={pilih.b ? styles.okText : styles.notText}>{item.satuan2}</Text>
-                            </TouchableOpacity>
-                        }
-
-                        {item.satuan3 !== "" &&
-
-                            <TouchableOpacity onPress={() => {
-                                setPilih({
-                                    a: false,
-                                    b: false,
-                                    c: true,
-                                    d: false,
-                                    e: false
-                                });
-                                setUom(item.satuan3)
-                            }} style={pilih.c ? styles.ok : styles.not}>
-                                <Text style={pilih.c ? styles.okText : styles.notText}>{item.satuan3}</Text>
-                            </TouchableOpacity>
-                        }
-
-                        {item.satuan4 !== "" &&
-                            <TouchableOpacity onPress={() => {
-                                setPilih({
-                                    a: false,
-                                    b: false,
-                                    c: false,
-                                    d: true,
-                                    e: false
-                                });
-                                setUom(item.satuan4)
-                            }} style={pilih.d ? styles.ok : styles.not}>
-                                <Text style={pilih.d ? styles.okText : styles.notText}>{item.satuan4}</Text>
-                            </TouchableOpacity>
-                        }
-
-                        {item.satuan5 !== "" &&
-                            <TouchableOpacity onPress={() => {
-                                setPilih({
-                                    a: false,
-                                    b: false,
-                                    c: false,
-                                    d: false,
-                                    e: true
-                                });
-                                setUom(item.satuan5)
-                            }} style={pilih.e ? styles.ok : styles.not}>
-                                <Text style={pilih.e ? styles.okText : styles.notText}>{item.satuan5}</Text>
-                            </TouchableOpacity>}
-                    </View>
 
 
 
@@ -392,7 +318,7 @@ export default function BarangEdit({ navigation, route }) {
 
                         <TouchableOpacity
                             onPress={() => {
-                                if (jumlah >= item.stok) {
+                                if (jumlah !== 1) {
                                     showMessage({
                                         type: 'danger',
                                         message: 'Pembelian melebihi batas !',

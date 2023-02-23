@@ -63,6 +63,10 @@ export default function Checkout({ navigation, route }) {
       console.log(c.data);
       // setComp(c.data);
       setBank(c.data);
+      setKirim({
+        ...kirim,
+        bank: c.data[0].nama_bank,
+      })
     })
 
 
@@ -72,8 +76,7 @@ export default function Checkout({ navigation, route }) {
       setKirim({
         ...kirim,
         catatan: '',
-        metode: 'Tunai',
-        bank: 'Tunai'
+        metode: 'Transfer',
       })
     });
 
@@ -93,7 +96,7 @@ export default function Checkout({ navigation, route }) {
       })
     } else {
       setLoading(true)
-      console.error('kirim', kirim);
+      console.log('kirim', kirim);
       axios.post(urlAPI + '/1add_transaksi.php', kirim).then(rr => {
         console.log('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data);
         setTimeout(() => {
@@ -185,140 +188,114 @@ export default function Checkout({ navigation, route }) {
                 left: 10,
                 fontSize: 12,
               }}>
-              Metode Pembayaran
+              Pilih Pembayaran
             </Text>
           </View>
-          <View style={{
-            flexDirection: 'row',
-            paddingHorizontal: 10,
-          }}>
-            <View style={{
-              flex: 1,
-              paddingRight: 10,
-            }}>
-              <TouchableOpacity onPress={() => {
-                setPilih({
-                  a: true,
-                  b: false
-                })
 
-                setKirim({
-                  ...kirim,
-                  metode: 'Tunai',
-                  bank: 'Tunai'
-                })
-              }} style={{
-                borderWidth: 1,
-                borderColor: pilih.a ? colors.primary : colors.black,
-                backgroundColor: pilih.a ? colors.primary : colors.white,
-                padding: 10,
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontFamily: fonts.secondary[600],
-                  fontSize: windowWidth / 25,
-                  color: pilih.a ? colors.white : colors.black,
-                }}>Tunai</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{
-              flex: 1,
-              paddingLeft: 10,
-            }}>
-              <TouchableOpacity onPress={() => {
-
-                setPilih({
-                  a: false,
-                  b: true
-                })
-
-
-                setKirim({
-                  ...kirim,
-                  metode: 'Transfer',
-                  bank: null
-                })
-
-              }
-              } style={{
-                borderWidth: 1,
-                padding: 10,
-                borderColor: pilih.b ? colors.primary : colors.black,
-                backgroundColor: pilih.b ? colors.primary : colors.white,
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontFamily: fonts.secondary[600],
-                  fontSize: windowWidth / 25,
-                  color: pilih.b ? colors.white : colors.black,
-                }}>Transfer</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
 
           <MyGap jarak={20} />
-          {pilih.b &&
 
-            bank.map(i => {
-              return (
-                <TouchableOpacity onPress={() => {
-                  setKirim({
-                    ...kirim,
-                    bank: i.nama_bank
-                  })
-                }} style={{
-                  backgroundColor: i.nama_bank == kirim.bank ? colors.border_list : colors.white,
-                  padding: 10,
-                  flexDirection: 'row',
-                  borderBottomWidth: 1,
-                  borderBottomColor: colors.border_list
+          {bank.map(i => {
+            return (
+              <TouchableOpacity onPress={() => {
+                setKirim({
+                  ...kirim,
+                  bank: i.nama_bank
+                })
+              }} style={{
+                backgroundColor: i.nama_bank == kirim.bank ? colors.border_list : colors.white,
+                padding: 10,
+                flexDirection: 'row',
+                borderBottomWidth: 1,
+                borderBottomColor: colors.border_list
+              }}>
+                <View style={{
+                  flex: 1,
                 }}>
-                  <View style={{
-                    flex: 1,
-                  }}>
-                    <Text style={{
-                      fontFamily: fonts.primary[600],
-                      color: colors.black,
-                      fontSize: 12,
-                    }}>{i.nama_bank}</Text>
-                    <Text style={{
-                      fontFamily: fonts.primary[400],
-                      color: colors.black,
-                      fontSize: 12,
-                    }}>{i.rekening_bank}</Text>
-                    <Text style={{
-                      fontFamily: fonts.primary[400],
-                      color: colors.black,
-                      fontSize: 12,
-                    }}>A.N {i.atas_nama}</Text>
-                  </View>
-                  <Image source={{
-                    uri: i.image
-                  }} style={{
-                    width: 80,
-                    height: 50,
-                    resizeMode: 'contain'
-                  }} />
-                </TouchableOpacity>
-              )
-            })
+                  <Text style={{
+                    fontFamily: fonts.primary[600],
+                    color: colors.black,
+                    fontSize: 12,
+                  }}>{i.nama_bank}</Text>
+                  <Text style={{
+                    fontFamily: fonts.primary[400],
+                    color: colors.black,
+                    fontSize: 12,
+                  }}>{i.rekening_bank}</Text>
+                  <Text style={{
+                    fontFamily: fonts.primary[400],
+                    color: colors.black,
+                    fontSize: 12,
+                  }}>A.N {i.atas_nama}</Text>
+                </View>
+                <Image source={{
+                  uri: i.image
+                }} style={{
+                  width: 80,
+                  height: 50,
+                  resizeMode: 'contain'
+                }} />
+              </TouchableOpacity>
+            )
+          })
 
           }
 
 
 
+
         </ScrollView>
-        <Text style={{
-          textAlign: 'center',
-          fontFamily: fonts.secondary[600],
-          fontSize: windowWidth / 15
+
+        <View style={{
+          flexDirection: 'row',
+          paddingHorizontal: 10,
         }}>
-          Rp. {new Intl.NumberFormat().format(route.params.harga_total)}
-        </Text>
+          <Text style={{
+            flex: 1,
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 30
+          }}>Total Transaksi</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 25
+          }}>
+            Rp. {new Intl.NumberFormat().format(route.params.harga_total)}
+          </Text>
+        </View>
+        <View style={{
+          flexDirection: 'row',
+          paddingHorizontal: 10,
+        }}>
+          <Text style={{
+            flex: 1,
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 30
+          }}>Pengiriman dan biaya penanganan</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 25
+          }}>
+            Rp. {new Intl.NumberFormat().format(20000)}
+          </Text>
+        </View>
+        <View style={{
+          flexDirection: 'row',
+          paddingHorizontal: 10,
+        }}>
+          <Text style={{
+            flex: 1,
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 30
+          }}>Total Pembayaran</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[600],
+            fontSize: windowWidth / 20
+          }}>
+            Rp. {new Intl.NumberFormat().format(parseFloat(route.params.harga_total) + 20000)}
+          </Text>
+        </View>
+
+
 
         <View style={{ padding: 10, backgroundColor: colors.white, }}>
           <MyButton

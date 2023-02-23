@@ -365,7 +365,7 @@ export default function BarangDetail({ navigation, route }) {
 
                         <TouchableOpacity
                             onPress={() => {
-                                if (jumlah >= item.stok) {
+                                if (jumlah !== 1) {
                                     showMessage({
                                         type: 'danger',
                                         message: 'Pembelian melebihi batas !',
