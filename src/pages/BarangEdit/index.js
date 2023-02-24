@@ -318,7 +318,7 @@ export default function BarangEdit({ navigation, route }) {
 
                         <TouchableOpacity
                             onPress={() => {
-                                if (jumlah !== 1) {
+                                if (jumlah >= 2) {
                                     showMessage({
                                         type: 'danger',
                                         message: 'Pembelian melebihi batas !',
