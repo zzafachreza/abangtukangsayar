@@ -65,8 +65,7 @@ export default function MyHeader({ telepon }) {
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Produk', {
-          key: 0,
+        <TouchableOpacity onPress={() => navigation.navigate('BarangCari', {
           id_user: user.id
         })} style={{
           flex: 1,

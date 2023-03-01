@@ -58,6 +58,7 @@ import {
   Wishlist,
   BarangDetail,
   BarangEdit,
+  BarangCari,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -73,7 +74,7 @@ const MainApp = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Suggest" component={Add} />
 
-      <Tab.Screen name="Produk" component={Barang} />
+      <Tab.Screen name="Produk" component={BarangCari} />
 
       <Tab.Screen name="Favorit" component={Wishlist} />
 
@@ -650,6 +651,14 @@ export default function Router() {
       <Stack.Screen
         name="Barang"
         component={Barang}
+        options={{
+          headerShown: false
+        }}
+      />
+
+      <Stack.Screen
+        name="BarangCari"
+        component={BarangCari}
         options={{
           headerShown: false
         }}

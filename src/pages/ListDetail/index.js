@@ -238,6 +238,56 @@ export default function ListDetail({ navigation, route }) {
             marginVertical: 5,
           }}>
 
+            <View style={{
+              flexDirection: 'row'
+            }}>
+              <Text
+                style={{
+                  flex: 1,
+                  fontFamily: fonts.secondary[400],
+                  padding: 10,
+                  fontSize: windowWidth / 30,
+                  color: colors.black,
+
+                }}>
+                Total Transaksi
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  padding: 10,
+                  fontSize: windowWidth / 25,
+                  color: colors.black,
+
+                }}>
+                Rp. {new Intl.NumberFormat().format(item.total_harga)}
+              </Text>
+            </View>
+            <View style={{
+              flexDirection: 'row'
+            }}>
+              <Text
+                style={{
+                  flex: 1,
+                  fontFamily: fonts.secondary[400],
+                  padding: 10,
+                  fontSize: windowWidth / 30,
+                  color: colors.black,
+
+                }}>
+                Pengiriman dan biaya penanganan
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  padding: 10,
+                  fontSize: windowWidth / 25,
+                  color: colors.black,
+
+                }}>
+                Rp. {new Intl.NumberFormat().format(item.ongkir)}
+              </Text>
+            </View>
 
             <View style={{
               flexDirection: 'row'
@@ -261,7 +311,7 @@ export default function ListDetail({ navigation, route }) {
                   color: colors.black,
 
                 }}>
-                Rp. {new Intl.NumberFormat().format(item.total_harga)}
+                Rp. {new Intl.NumberFormat().format(item.total_bayar)}
               </Text>
             </View>
           </View>

@@ -275,7 +275,7 @@ export default function Checkout({ navigation, route }) {
             fontFamily: fonts.secondary[400],
             fontSize: windowWidth / 25
           }}>
-            Rp. {new Intl.NumberFormat().format(20000)}
+            Rp. {new Intl.NumberFormat().format(8500)}
           </Text>
         </View>
         <View style={{

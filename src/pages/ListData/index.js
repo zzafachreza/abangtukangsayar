@@ -143,7 +143,7 @@ export default function ({ navigation, route }) {
             fontSize: windowWidth / 30,
             fontFamily: fonts.secondary[400],
             color: colors.textPrimary,
-          }}>Rp. {new Intl.NumberFormat().format(item.total_harga)}</Text>
+          }}>Rp. {new Intl.NumberFormat().format(item.total_bayar)}</Text>
 
         </View>
 

@@ -87,14 +87,15 @@ export default function ({ navigation, route }) {
 
 
 
-  const getDataBarang = () => {
+  const getDataBarang = (key = '') => {
     setLoading(true);
 
     getData('user').then(res => {
       setUser(res);
       axios.post(urlAPI + '/1data_barang.php', {
         fid_subkategori: route.params.fid_subkategori,
-        fid_user: res.id
+        fid_user: res.id,
+        key: key
       }).then(dt => {
 
         setMykey('');
