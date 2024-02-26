@@ -77,7 +77,6 @@ export default function Home({ navigation }) {
 
   const getDataKategori = () => {
     axios.post(urlAPI + '/1data_kategori.php').then(res => {
-      console.log('kategori', res.data);
 
       setKategori(res.data);
     })
@@ -91,7 +90,6 @@ export default function Home({ navigation }) {
       setUser(users);
 
       getData('token').then(res => {
-        console.log('data token,', res);
         setToken(res.token);
         axios
           .post(urlAPI + '/update_token.php', {
@@ -155,7 +153,7 @@ export default function Home({ navigation }) {
         flex: 1,
         backgroundColor: colors.white,
       }}>
-      <MyHeader telepon={comp.tlp} />
+      <MyHeader />
       <ScrollView style={{
         backgroundColor: colors.background1
       }}>

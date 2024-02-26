@@ -291,7 +291,7 @@ export default function Checkout({ navigation, route }) {
             fontFamily: fonts.secondary[600],
             fontSize: windowWidth / 20
           }}>
-            Rp. {new Intl.NumberFormat().format(parseFloat(route.params.harga_total) + 20000)}
+            Rp. {new Intl.NumberFormat().format(parseFloat(route.params.harga_total) + 8500)}
           </Text>
         </View>
 

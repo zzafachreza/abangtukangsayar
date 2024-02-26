@@ -31,10 +31,12 @@ export default function MyHeader({ telepon }) {
   const [cart, setCart] = useState(0);
 
   const [user, setUser] = useState({});
-
+  const [comp, setComp] = useState({});
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   useEffect(() => {
+
+
     if (isFocused) {
       getData('user').then(users => {
         setUser(users)
@@ -46,6 +48,12 @@ export default function MyHeader({ telepon }) {
           setCart(parseFloat(res.data))
         })
       })
+
+      axios.post(urlAPI + '/company.php').then(c => {
+        console.log(c.data);
+        setComp(c.data);
+      })
+
     }
   }, [isFocused])
 
@@ -99,7 +107,8 @@ export default function MyHeader({ telepon }) {
 
         <TouchableOpacity
           onPress={() => {
-            Linking.openURL('https://wa.me/' + telepon)
+            Linking.openURL('https://wa.me/' + comp.tlp)
+
           }}
           style={{
             position: 'relative',

@@ -20,5 +20,5 @@ export const getData = async key => {
 };
 
 
-export const urlAPI = 'https://abangtukangsayur.okeadmin.com/api';
-export const MYAPP = 'Abang Tukang Sayur';
+export const urlAPI = 'https://pracangan.laukinstant.com/api';
+export const MYAPP = 'Pracangan';
